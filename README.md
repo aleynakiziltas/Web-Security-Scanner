@@ -13,7 +13,7 @@ Bu Python script'i, belirli bir web sayfasını tarayarak sayfadaki tüm bağlan
 security_scanner.py dosyasını bir metin düzenleyiciyle açın ve target_url değişkenine taranacak web sayfasının URL'sini girin.
 
 Terminal veya komut istemcisinde şu komutu çalıştırarak script'i başlatın:
-
+ ```bash
 python security_scanner.py
 
 Dikkat
