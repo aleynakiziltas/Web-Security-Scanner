@@ -1,0 +1,48 @@
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
+
+def extract_links(url, html_content):
+    soup = BeautifulSoup(html_content, 'html.parser')
+    links = []
+    for a_tag in soup.find_all('a', href=True):
+        link = urljoin(url, a_tag['href'])
+        links.append(link)
+    return links
+
+def scan_page(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
+        return
+
+    links = extract_links(url, response.text)
+
+    print(f"Scanning {url}...")
+
+    for link in links:
+        try:
+            link_response = requests.get(link)
+            link_response.raise_for_status()
+
+            # Perform security scanning here
+            check_security(link, link_response)
+        except requests.exceptions.RequestException:
+            print(f"Failed to retrieve {link}")
+            continue
+
+def check_security(link, response):
+    print(f"Checking security for link: {link}")
+
+    # Example security check: Check if the response headers indicate security issues
+    security_headers = response.headers.get("Content-Security-Policy", "")
+    if "unsafe-inline" in security_headers:
+        print(f" - Security Warning: {link} allows unsafe inline content.")
+
+    # Add more security checks as needed
+
+if __name__ == "__main__":
+    target_url = "https://example.com"
+    scan_page(target_url)
