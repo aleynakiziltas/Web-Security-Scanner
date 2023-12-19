@@ -1,8 +1,5 @@
 # Web-Security-Scanner
 
-Copy code
-# Web Güvenlik Tarayıcı
-
 Bu Python script'i, belirli bir web sayfasını tarayarak sayfadaki tüm bağlantıları (linkleri) bulur ve her bir bağlantı için basit bir güvenlik taraması gerçekleştirir. Temel amaç, potansiyel güvenlik risklerini belirlemek ve kullanıcıyı bu risklere karşı uyarabilmektir.
 
 ## Kullanım
